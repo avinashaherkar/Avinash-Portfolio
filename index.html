@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reel Cut — Short-Form Video Editor</title>
+<title>Avinash Aherkar — Short-Form Video Editor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -273,33 +273,6 @@
     text-align:right;
   }
 
-  /* ---------- filter tabs ---------- */
-  .filter-tabs{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:40px;
-  }
-  .filter-tab{
-    font-family:var(--font-mono);
-    font-size:12px;
-    letter-spacing:0.04em;
-    color:var(--text-muted);
-    background:transparent;
-    border:1px solid var(--line);
-    padding:9px 16px;
-    border-radius:2px;
-    cursor:pointer;
-    transition:border-color .2s ease, color .2s ease, background .2s ease;
-  }
-  .filter-tab:hover{ color:var(--text); border-color:var(--line-strong); }
-  .filter-tab.active{
-    color:#0B0D0F;
-    background:var(--accent);
-    border-color:var(--accent);
-    font-weight:700;
-  }
-
   /* ---------- work grid ---------- */
   .work-grid{
     display:grid;
@@ -322,23 +295,22 @@
   .card-thumb{
     position:absolute;
     inset:0;
-    background-size:220% 220%;
-    background-position:20% 30%;
-    transition:background-position 1.2s ease, transform .5s ease;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    background:var(--surface-2);
+    transition:transform .5s ease;
   }
   .card:hover .card-thumb{
-    background-position:80% 70%;
     transform:scale(1.04);
   }
 
   .card-overlay{
     position:absolute;
-    inset:0;
-    background:linear-gradient(180deg, rgba(11,13,15,0.05) 0%, rgba(11,13,15,0.15) 55%, rgba(11,13,15,0.92) 100%);
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    padding:16px;
+    top:0; left:0; right:0;
+    background:linear-gradient(180deg, rgba(11,13,15,0.85) 0%, rgba(11,13,15,0.35) 70%, transparent 100%);
+    padding:14px 16px 28px;
+    pointer-events:none;
   }
 
   .card-tag{
@@ -371,16 +343,18 @@
   .card:hover .card-play{ opacity:1; transform:scale(1); border-color:var(--text); }
   .card-play svg{ width:14px; height:14px; margin-left:2px; }
 
-  .card-info{ display:flex; justify-content:space-between; align-items:flex-end; }
+  .card-info{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
   .card-info h3{
     font-family:var(--font-body);
     font-weight:600;
-    font-size:15px;
+    font-size:14px;
+    line-height:1.3;
   }
   .card-duration{
     font-family:var(--font-mono);
     font-size:11px;
     color:var(--text-muted);
+    white-space:nowrap;
   }
 
   /* thumbnail gradient variants — orange/teal grading family */
@@ -456,7 +430,7 @@
   /* ---------- process ---------- */
   .process-list{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    grid-template-columns:repeat(2, 1fr);
     gap:1px;
     background:var(--line);
     border:1px solid var(--line);
@@ -530,13 +504,13 @@
     .nav-links, .nav-cta{ display:none; }
     .work-grid{ grid-template-columns:repeat(2, 1fr); }
     .about-grid{ grid-template-columns:1fr; gap:56px; }
-    .process-list{ grid-template-columns:repeat(2, 1fr); }
     .monitor-top{ margin-bottom:40px; }
     .monitor-bottom{ flex-wrap:wrap; gap:12px; }
     .scrubber{ order:3; width:100%; margin:8px 0 0; }
   }
   @media (max-width:560px){
     .wrap{ padding:0 20px; }
+    .logo{ font-size:18px; letter-spacing:0.02em; }
     .work-grid{ grid-template-columns:1fr; }
     .process-list{ grid-template-columns:1fr; }
     .stats{ gap:32px; }
@@ -558,7 +532,7 @@
 <header id="siteHeader">
   <div class="wrap">
     <nav>
-      <a href="#top" class="logo">CUT<span>/</span>REEL</a>
+      <a href="#top" class="logo">AVINASH AHERKAR<span> ·</span> PORTFOLIO</a>
       <ul class="nav-links">
         <li><a href="#work">Work</a></li>
         <li><a href="#about">About</a></li>
@@ -619,91 +593,63 @@
     <div class="wrap">
       <div class="section-head">
         <h2 class="section-title">Selected Work</h2>
-        <p class="section-note">A running edit of recent reels, TikToks &amp; brand shorts. Hover to scrub.</p>
-      </div>
-
-      <div class="filter-tabs" role="tablist" aria-label="Filter work by category">
-        <button class="filter-tab active" data-filter="all">All</button>
-        <button class="filter-tab" data-filter="brand">Brand</button>
-        <button class="filter-tab" data-filter="creator">Creator</button>
-        <button class="filter-tab" data-filter="realestate">Real Estate</button>
-        <button class="filter-tab" data-filter="fashion">Fashion</button>
-        <button class="filter-tab" data-filter="music">Music</button>
-        <button class="filter-tab" data-filter="event">Event</button>
+        <p class="section-note">A running edit of recent short-form work. Hover to scrub.</p>
       </div>
 
       <div class="work-grid">
         <!-- EDIT ME: replace card-thumb background + video links with your real work -->
-        <div class="card" data-category="brand">
-          <div class="card-thumb t1"></div>
+        <div class="card">
+          <video class="card-thumb" src="videos/1.mp4" poster="posters/1.jpg" muted loop playsinline preload="metadata" controls></video>
           <div class="card-overlay">
-            <span class="card-tag">Brand · Reel</span>
-            <span class="card-play"><svg viewBox="0 0 14 14" fill="none"><path d="M3 2L12 7L3 12V2Z" fill="white"/></svg></span>
-            <div class="card-info"><h3>Launch Day Recap</h3><span class="card-duration">00:24</span></div>
+            <div class="card-info"><h3>Real Estate 01</h3><span class="card-duration">01:10</span></div>
           </div>
         </div>
-        <div class="card" data-category="creator">
-          <div class="card-thumb t2"></div>
+        <div class="card">
+          <video class="card-thumb" src="videos/2.mp4" poster="posters/2.jpg" muted loop playsinline preload="metadata" controls></video>
           <div class="card-overlay">
-            <span class="card-tag">Creator · TikTok</span>
-            <span class="card-play"><svg viewBox="0 0 14 14" fill="none"><path d="M3 2L12 7L3 12V2Z" fill="white"/></svg></span>
-            <div class="card-info"><h3>Day in the Life</h3><span class="card-duration">00:41</span></div>
+            <div class="card-info"><h3>Real Estate 02</h3><span class="card-duration">01:13</span></div>
           </div>
         </div>
-        <div class="card" data-category="realestate">
-          <div class="card-thumb t7"></div>
+        <div class="card">
+          <video class="card-thumb" src="videos/3.mp4" poster="posters/3.jpg" muted loop playsinline preload="metadata" controls></video>
           <div class="card-overlay">
-            <span class="card-tag">Real Estate · Walkthrough</span>
-            <span class="card-play"><svg viewBox="0 0 14 14" fill="none"><path d="M3 2L12 7L3 12V2Z" fill="white"/></svg></span>
-            <div class="card-info"><h3>Hillside Listing Tour</h3><span class="card-duration">00:52</span></div>
+            <div class="card-info"><h3>Motion Graphics 01</h3><span class="card-duration">00:30</span></div>
           </div>
         </div>
-        <div class="card" data-category="fashion">
-          <div class="card-thumb t8"></div>
+        <div class="card">
+          <video class="card-thumb" src="videos/4.mp4" poster="posters/4.jpg" muted loop playsinline preload="metadata" controls></video>
           <div class="card-overlay">
-            <span class="card-tag">Fashion · Lookbook</span>
-            <span class="card-play"><svg viewBox="0 0 14 14" fill="none"><path d="M3 2L12 7L3 12V2Z" fill="white"/></svg></span>
-            <div class="card-info"><h3>Minimal Lookbook</h3><span class="card-duration">00:22</span></div>
+            <div class="card-info"><h3>Motion Graphics 02</h3><span class="card-duration">00:31</span></div>
           </div>
         </div>
-        <div class="card" data-category="music">
-          <div class="card-thumb t3"></div>
+        <div class="card">
+          <video class="card-thumb" src="videos/5.mp4" poster="posters/5.jpg" muted loop playsinline preload="metadata" controls></video>
           <div class="card-overlay">
-            <span class="card-tag">Music · Short</span>
-            <span class="card-play"><svg viewBox="0 0 14 14" fill="none"><path d="M3 2L12 7L3 12V2Z" fill="white"/></svg></span>
-            <div class="card-info"><h3>Studio Session Cut</h3><span class="card-duration">00:19</span></div>
+            <div class="card-info"><h3>Fashion &amp; Lifestyle 01</h3><span class="card-duration">00:39</span></div>
           </div>
         </div>
-        <div class="card" data-category="brand">
-          <div class="card-thumb t4"></div>
+        <div class="card">
+          <video class="card-thumb" src="videos/6.mp4" poster="posters/6.jpg" muted loop playsinline preload="metadata" controls></video>
           <div class="card-overlay">
-            <span class="card-tag">Brand · Ad</span>
-            <span class="card-play"><svg viewBox="0 0 14 14" fill="none"><path d="M3 2L12 7L3 12V2Z" fill="white"/></svg></span>
-            <div class="card-info"><h3>Product Drop Teaser</h3><span class="card-duration">00:15</span></div>
+            <div class="card-info"><h3>Fashion &amp; Lifestyle 02</h3><span class="card-duration">00:41</span></div>
           </div>
         </div>
-        <div class="card" data-category="creator">
-          <div class="card-thumb t5"></div>
+        <div class="card">
+          <video class="card-thumb" src="videos/7.mp4" poster="posters/7.jpg" muted loop playsinline preload="metadata" controls></video>
           <div class="card-overlay">
-            <span class="card-tag">Creator · Reel</span>
-            <span class="card-play"><svg viewBox="0 0 14 14" fill="none"><path d="M3 2L12 7L3 12V2Z" fill="white"/></svg></span>
-            <div class="card-info"><h3>Behind the Scenes</h3><span class="card-duration">00:36</span></div>
+            <div class="card-info"><h3>Commercial 01</h3><span class="card-duration">00:44</span></div>
           </div>
         </div>
-        <div class="card" data-category="event">
-          <div class="card-thumb t6"></div>
+        <div class="card">
+          <video class="card-thumb" src="videos/8.mp4" poster="posters/8.jpg" muted loop playsinline preload="metadata" controls></video>
           <div class="card-overlay">
-            <span class="card-tag">Event · Recap</span>
-            <span class="card-play"><svg viewBox="0 0 14 14" fill="none"><path d="M3 2L12 7L3 12V2Z" fill="white"/></svg></span>
-            <div class="card-info"><h3>Tour Stop 04</h3><span class="card-duration">00:28</span></div>
+            <div class="card-info"><h3>Commercial 02</h3><span class="card-duration">00:37</span></div>
           </div>
         </div>
-        <div class="card" data-category="fashion">
-          <div class="card-thumb t9"></div>
+        <div class="card">
+          <video class="card-thumb" src="videos/9.mp4" poster="posters/9.jpg" muted loop playsinline preload="metadata" controls></video>
           <div class="card-overlay">
-            <span class="card-tag">Fashion · Editorial</span>
-            <span class="card-play"><svg viewBox="0 0 14 14" fill="none"><path d="M3 2L12 7L3 12V2Z" fill="white"/></svg></span>
-            <div class="card-info"><h3>Capsule Collection</h3><span class="card-duration">00:18</span></div>
+            <div class="card-info"><h3>Commercial 03</h3><span class="card-duration">00:23</span></div>
           </div>
         </div>
       </div>
@@ -722,10 +668,10 @@
         </div>
         <div class="about-copy">
           <p>
-            <strong>I'm a short-form video editor</strong> working with brands and
-            creators who need content that earns the first three seconds and holds
-            attention through the last. Every cut, caption, and sound hit is placed
-            to keep the thumb still.
+            <strong>I'm Avinash Aherkar</strong>, a short-form video editor working
+            with brands and creators who need content that earns the first three
+            seconds and holds attention through the last. Every cut, caption, and
+            sound hit is placed to keep the thumb still.
           </p>
           <p>
             My process blends fast-paced pacing with intentional pauses — pulling from
@@ -771,23 +717,13 @@
       <div class="process-list">
         <div class="process-item">
           <div class="process-time">DAY 01</div>
-          <h4>Footage &amp; brief</h4>
-          <p>You send raw clips and goals — platform, tone, reference edits.</p>
+          <h4>Brief &amp; rough cut</h4>
+          <p>You send raw clips and goals — platform, tone, reference edits. First pass on pacing and structure comes back the same day.</p>
         </div>
         <div class="process-item">
           <div class="process-time">DAY 02</div>
-          <h4>Rough cut</h4>
-          <p>First pass on pacing and structure, sent over for a gut-check.</p>
-        </div>
-        <div class="process-item">
-          <div class="process-time">DAY 03</div>
-          <h4>Polish pass</h4>
-          <p>Sound design, captions, motion graphics, and color grade.</p>
-        </div>
-        <div class="process-item">
-          <div class="process-time">DAY 04</div>
-          <h4>Deliver</h4>
-          <p>Export in every aspect ratio you need, ready to post.</p>
+          <h4>Polish &amp; deliver</h4>
+          <p>Sound design, captions, motion graphics, and color grade — then export in every aspect ratio you need, ready to post.</p>
         </div>
       </div>
     </div>
@@ -800,18 +736,16 @@
   <div class="wrap contact-inner">
     <span class="eyebrow">Currently booking Q4 2026</span>
     <h2>Let's cut<br>something great.</h2>
-    <a href="mailto:hello@yourname.com" class="contact-email">hello@yourname.com</a>
+    <a href="mailto:avaherkar@gmail.com" class="contact-email">avaherkar@gmail.com</a>
     <div class="socials">
-      <a href="#">Instagram</a>
-      <a href="#">TikTok</a>
-      <a href="#">Vimeo</a>
+      <a href="https://wa.me/917083911855" target="_blank" rel="noopener">WhatsApp · +91 70839 11855</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
-    <span>© 2026 Your Name — Video Editor</span>
+    <span>© 2026 Avinash Aherkar — Video Editor</span>
     <span>Based in — / Available worldwide</span>
   </div>
 </footer>
@@ -853,23 +787,7 @@
     io.observe(c);
   });
 
-  // filter tabs
-  const tabs = document.querySelectorAll('.filter-tab');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      const filter = tab.dataset.filter;
-      cards.forEach(card => {
-        const match = filter === 'all' || card.dataset.category === filter;
-        card.style.display = match ? '' : 'none';
-        if(match){
-          // re-trigger reveal for cards coming back into view
-          card.classList.add('visible');
-        }
-      });
-    });
-  });
+
 </script>
 
 </body>
